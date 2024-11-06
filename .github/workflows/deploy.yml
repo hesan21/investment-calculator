@@ -35,10 +35,16 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Check GH_TOKEN availability
-        run: echo "GH_TOKEN is set"
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "GH_TOKEN is not set!"
+            exit 1
+          else
+            echo "GH_TOKEN is set"
+          fi
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-
+          
       # Step 6: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         run: npm run deploy
