@@ -28,13 +28,6 @@ jobs:
       - name: Build the app
         run: npm run build
 
-      - name: Set up Git user for commits
-        run: |
-          git config --global user.name "hesan21"
-          git config --global user.email "hesannaveed21@gmail.com"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       # Step 5: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         run: npm run deploy
