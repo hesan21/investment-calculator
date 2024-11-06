@@ -28,23 +28,15 @@ jobs:
       - name: Build the app
         run: npm run build
 
-      # Step 5: Set up Git user for commits
-      - name: Set up Git user for commits
+      # Step 5: Configure Git for deployment (use GH_TOKEN for authentication)
+      - name: Set up Git user and authenticate with GH_TOKEN
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Check GH_TOKEN availability
-        run: |
-          if [ -z "$GH_TOKEN" ]; then
-            echo "GH_TOKEN is not set!"
-            exit 1
-          else
-            echo "GH_TOKEN is set"
-          fi
+          git remote set-url origin https://github.com/${{ github.repository }}.git
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          
+
       # Step 6: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         run: npm run deploy
