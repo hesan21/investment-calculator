@@ -28,13 +28,14 @@ jobs:
       - name: Build the app
         run: npm run build
 
+      # Step 5: Set up Git user for commits
       - name: Set up Git user for commits
         run: |
-          git config --global user.name "hesan21"
-          git config --global user.email "hesannaveed21@gmail.com"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
 
-      # Step 5: Deploy to GitHub Pages
+      # Step 6: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         run: npm run deploy
         env:
